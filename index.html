@@ -6,62 +6,54 @@
 <title>Adega Vibe Manager</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a2218;--card:#143628;--card2:#1a4231;--line:rgba(212,168,92,0.15);--dourado:#d4a85c;--dourado2:#f0d18a;--text:#e8efe9;--muted:#7fa090}
+:root{--bg:#0a2218;--card:#143628;--card2:#1a4231;--line:rgba(212,168,92,0.15);--dourado:#d4a85c;--dourado2:#f0d18a;--text:#e8efe9;--muted:#7fa090;--green:#25D366}
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;padding-bottom:90px}
-.top{padding:22px 18px 10px;max-width:1100px;margin:auto}
+.top{padding:20px 18px 10px;max-width:1100px;margin:auto}
 .top small{color:var(--dourado);font-size:10px;letter-spacing:2px;font-weight:800;text-transform:uppercase}
-.top h1{font-size:32px;font-weight:800;letter-spacing:-1px;margin-top:4px}
-.top p{color:var(--muted);font-size:13px;margin-top:6px}
-.wrap{max-width:1100px;margin:auto;padding:16px;display:grid;gap:14px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{background:linear-gradient(180deg, var(--card2), var(--card));border:1px solid var(--line);border-radius:20px;padding:18px;position:relative}
-.card h3{font-size:12px;color:var(--muted);font-weight:600}
-.card .val{font-size:26px;font-weight:800;margin-top:8px}
-.card .sub{font-size:11px;color:var(--muted);margin-top:6px}
-.card .icon{position:absolute;top:18px;right:18px;width:32px;height:32px;background:rgba(212,168,92,0.12);border:1px solid rgba(212,168,92,0.2);border-radius:10px;display:grid;place-items:center;color:var(--dourado)}
-.big-card{background:linear-gradient(180deg, #17402f, #123222);border:1px solid var(--line);border-radius:20px;padding:20px}
-.big-card h3{font-size:15px;font-weight:800}
-.big-card p{font-size:11px;color:var(--muted);margin-top:2px}
-.chart{margin-top:24px;height:120px}
-.chart .labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:8px}
-.empty{text-align:center;padding:30px 20px}
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,34,24,0.95);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 0 14px}
-.nav a{text-decoration:none;color:var(--muted);font-size:10px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.nav a.active{color:var(--dourado)}
+.top h1{font-size:30px;font-weight:800}
+.top p{color:var(--muted);font-size:12px;margin-top:4px}
+.wrap{max-width:1100px;margin:auto;padding:12px;display:grid;gap:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:16px;position:relative;cursor:pointer;transition:0.2s}
+.card:active{transform:scale(0.97);border-color:var(--dourado)}
+.card h3{font-size:11px;color:var(--muted)}
+.card .val{font-size:22px;font-weight:800;margin-top:6px}
+.card .sub{font-size:10px;color:var(--muted);margin-top:4px}
+.card .icon{position:absolute;top:14px;right:14px;width:28px;height:28px;background:rgba(212,168,92,0.12);border-radius:10px;display:grid;place-items:center;color:var(--dourado);font-size:12px}
+.big-card{background:linear-gradient(180deg,#17402f,#123222);border:1px solid var(--line);border-radius:20px;padding:18px}
+.page{display:none}.page.active{display:block}
+.list-item{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.btn{border:none;border-radius:999px;padding:12px 18px;font-weight:800;font-size:12px;cursor:pointer}
+.btn-gold{background:var(--dourado);color:var(--bg)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--line)}
+.input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;color:var(--text);margin-top:6px;margin-bottom:10px}
+.fab{position:fixed;bottom:90px;right:18px;width:56px;height:56px;background:var(--dourado);color:var(--bg);border:none;border-radius:50%;font-size:28px;font-weight:800;box-shadow:0 8px 20px rgba(0,0,0,0.4);cursor:pointer;z-index:10}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(10,34,24,0.98);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 0 14px;z-index:20}
+.nav button{background:none;border:none;color:var(--muted);font-size:9px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.nav button.active{color:var(--dourado)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;place-items:center;z-index:30;padding:20px}
+.modal.open{display:grid}
+.modal-box{background:var(--card2);border:1px solid var(--line);border-radius:20px;padding:20px;width:100%;max-width:380px}
 </style>
 </head>
 <body>
 <div class="top">
-<small>QUARTA-FEIRA • ROTINA DA LOJA</small>
-<h1>Visão geral</h1>
-<p>Um resumo direto para você começar o dia com tudo no lugar.</p>
+<small id="diaTop">QUARTA-FEIRA • ROTINA DA LOJA</small>
+<h1 id="tituloTop">Visão geral</h1>
+<p id="subTop">Um resumo direto para você começar o dia com tudo no lugar.</p>
 </div>
+
 <div class="wrap">
+<!-- VISAO GERAL -->
+<div id="page-visao" class="page active">
 <div class="grid2">
-<div class="card"><div class="icon">₿</div><h3>Vendas do hoje</h3><div class="val">R$ 0,00</div><div class="sub">Total vendido desde a abertura</div></div>
-<div class="card"><div class="icon">↗</div><h3>Vendas no período</h3><div class="val">R$ 6,00</div><div class="sub">1 pedidos registrados</div></div>
-<div class="card"><div class="icon">↘</div><h3>Saldo líquido do caixa</h3><div class="val">R$ 6,00</div><div class="sub">Entradas menos despesas no período</div></div>
-<div class="card"><div class="icon">⚠</div><h3>Estoque para atenção</h3><div class="val">00</div><div class="sub">Produtos no limite de reposição</div></div>
+<div class="card" onclick="go('vendas')"><div class="icon">₿</div><h3>Vendas do hoje</h3><div class="val" id="vHoje">R$ 0,00</div><div class="sub">Total vendido desde a abertura</div></div>
+<div class="card" onclick="go('vendas')"><div class="icon">↗</div><h3>Vendas no período</h3><div class="val" id="vPeriodo">R$ 6,00</div><div class="sub" id="qtdPedidos">1 pedidos registrados</div></div>
+<div class="card" onclick="go('caixa')"><div class="icon">↘</div><h3>Saldo líquido do caixa</h3><div class="val" id="saldo">R$ 6,00</div><div class="sub">Entradas menos despesas</div></div>
+<div class="card" onclick="go('produtos')"><div class="icon">⚠</div><h3>Estoque para atenção</h3><div class="val" id="estoqueAt">00</div><div class="sub">Produtos no limite</div></div>
 </div>
-<div class="big-card">
+<div class="big-card" style="margin-top:12px" onclick="go('vendas')">
 <h3>Ritmo de vendas</h3><p>Acompanhe o movimento dos últimos dias</p>
-<div class="chart">
-<svg viewBox="0 0 400 80" preserveAspectRatio="none" style="width:100%;height:80px">
-<path d="M0 60 L80 60 L160 60 L240 55 L300 20 L360 60 L400 60" fill="none" stroke="#d4a85c" stroke-width="2"/>
-<path d="M0 60 L80 60 L160 60 L240 55 L300 20 L360 60 L400 60 L400 80 L0 80 Z" fill="rgba(212,168,92,0.15)"/>
-<circle cx="300" cy="20" r="5" fill="#f0d18a" stroke="#0a2218" stroke-width="2"/>
-</svg>
-<div class="labels"><span>25 out.</span><span>26 out.</span><span>27 out.</span><span>28 out.</span><span>29 out.</span><span>30 out.</span><span>31 out.</span></div>
-</div>
-</div>
-<div class="big-card">
-<div style="display:flex;justify-content:space-between"><div><h3>Pede reposição</h3><p>Produtos no nível mínimo ou abaixo</p></div><a style="color:#d4a85c;font-size:11px;font-weight:700">Ver estoque →</a></div>
-<div class="empty"><div style="width:48px;height:48px;background:rgba(212,168,92,0.12);border-radius:14px;display:grid;place-items:center;margin:0 auto 12px">📦</div><b>Estoque tranquilo</b></div>
-</div>
-</div>
-<nav class="nav">
-<a class="active">⊞<br>Visão geral</a><a>🛒<br>Vendas</a><a>📦<br>Produtos</a><a>👥<br>Clientes</a><a>💰<br>Caixa</a>
-</nav>
-</body>
-</html>
+<svg viewBox="0 0 400 80" style="width:100%;height:80px;margin-top:16px"><path d="M0 60 L80 60 L160 60 L240 55 L300 20 L360 60 L400 60" fill="none" stroke="#d4a85c" stroke-width="2"/><circle cx="300" cy="20" r="5" fill="#f0d18a"/></
+
