@@ -1,7 +1,88 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset=UTF-8">
-<meta name="viewport"
-content="width=devide-width, initial-
-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adega Vibe - A melhor adega da cidade | Delivery de Bebidas</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+*{font-family:'Outfit',sans-serif}
+.font-bebas{font-family:'Bebas Neue',sans-serif}
+.glass{backdrop-filter:blur(16px);background:rgba(0,0,0,0.7)}
+.neon{box-shadow:0 0 20px rgba(168,85,247,0.5)}
+</style>
+</head>
+<body class="bg-[#0a0a0a] text-white">
+
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl bg-black/70 border-b border-white/10">
+<div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center font-black text-xl">AV</div>
+<div><h1 class="font-black text-xl leading-none tracking-wider">ADEGA VIBE</h1><p class="text-[10px] tracking-[0.3em] text-purple-300 -mt-1">DELIVERY • 24H</p></div>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:flex items-center gap-2 text-xs bg-green-500/20 text-green-400 px-3 py-1.5 rounded-full border border-green-500/30"><span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> ABERTO AGORA</div>
+<button onclick="toggleCart()" class="relative bg-white text-black px-5 py-2.5 rounded-full font-bold text-sm flex items-center gap-2">🛒 <span id="cart-count">0</span> CARRINHO</button>
+</div>
+</div>
+</header>
+
+<section class="pt-24 pb-10 px-4 max-w-7xl mx-auto">
+<div class="grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="inline-flex bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full text-xs text-purple-300 mb-4">🔥 MAIS PEDIDO EM MIRASSOLÂNDIA</div>
+<h2 class="font-black text-6xl md:text-8xl leading-[0.9]">BEBIDA<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">GELADA</span><br>EM 30 MIN</h2>
+<p class="text-zinc-400 mt-4">A adega mais braba da região. Cerveja trincando, destilado original, gelo, carvão e narguile. Chama no zap!</p>
+<div class="flex gap-3 mt-6">
+<a href="https://wa.me/5517999999999?text=Olá! Quero fazer um pedido na Adega Vibe!" target="_blank" class="bg-green-500 text-black px-8 py-4 rounded-full font-black text-sm">PEDIR NO WHATSAPP</a>
+<button onclick="document.getElementById('produtos').scrollIntoView({behavior:'smooth'})" class="border border-white/20 px-8 py-4 rounded-full font-bold text-sm">VER CARDÁPIO</button>
+</div>
+</div>
+<div class="relative"><div class="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-pink-600/30 blur-[80px] rounded-full"></div><img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=1000" class="relative rounded-[2rem] border border-white/10 w-full object-cover aspect-[4/5]"></div>
+</div>
+</section>
+
+<div class="max-w-7xl mx-auto px-4 py-6 flex gap-3 overflow-x-auto">
+<button onclick="filterCat('todos')" class="cat-btn whitespace-nowrap px-6 py-2.5 rounded-full bg-white text-black font-bold text-sm">TODOS</button>
+<button onclick="filterCat('cerveja')" class="cat-btn whitespace-nowrap px-6 py-2.5 rounded-full border border-white/20 font-bold text-sm">🍺 CERVEJAS</button>
+<button onclick="filterCat('destilado')" class="cat-btn whitespace-nowrap px-6 py-2.5 rounded-full border border-white/20 font-bold text-sm">🥃 DESTILADOS</button>
+<button onclick="filterCat('energetico')" class="cat-btn whitespace-nowrap px-6 py-2.5 rounded-full border border-white/20 font-bold text-sm">⚡ ENERGÉTICOS</button>
+<button onclick="filterCat('gelo')" class="cat-btn whitespace-nowrap px-6 py-2.5 rounded-full border border-white/20 font-bold text-sm">🧊 GELO & CARVÃO</button>
+</div>
+
+<section id="produtos" class="max-w-7xl mx-auto px-4 pb-32"><div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div></section>
+
+<div id="cart-drawer" class="fixed inset-0 z-[100] hidden"><div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleCart()"></div><div class="absolute right-0 top-0 h-full w-full max-w-md bg-[#111] border-l border-white/10 flex flex-col"><div class="p-6 border-b border-white/10 flex justify-between items-center"><h3 class="font-black text-3xl">SEU CARRINHO</h3><button onclick="toggleCart()" class="w-8 h-8 rounded-full bg-white/10">✕</button></div><div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div><div class="p-6 border-t border-white/10 bg-[#0a0a0a]"><div class="flex justify-between font-black text-lg mb-4"><span>TOTAL</span><span id="cart-total" class="text-green-400">R$ 0,00</span></div><button onclick="finalizarWhats()" class="w-full bg-green-500 text-black py-4 rounded-full font-black">FINALIZAR NO WHATSAPP 🚀</button></div></div></div>
+
+<footer class="border-t border-white/10 py-10 text-center text-zinc-500 text-xs"><p class="font-black text-white text-xl">ADEGA VIBE</p><p>Mirassolândia - SP • Entrega em até 30 min • Aberto até 02:00</p></footer>
+
+<script>
+const produtos=[
+{id:1,nome:"Heineken 330ml - Pack 6un",preco:42.90,cat:"cerveja",img:"https://images.unsplash.com/photo-1608270586620-248524c67de9?q=80&w=500",promo:true},
+{id:2,nome:"Budweiser 350ml - Lata",preco:4.50,cat:"cerveja",img:"https://images.unsplash.com/photo-1618880547642-1dc4c83eab95?q=80&w=500"},
+{id:3,nome:"Corona Extra 330ml",preco:6.90,cat:"cerveja",img:"https://images.unsplash.com/photo-1558346489-19413928158b?q=80&w=500"},
+{id:4,nome:"Jack Daniel's 1L",preco:149.90,cat:"destilado",img:"https://images.unsplash.com/photo-1527281400683-1aae777175f?q=80&w=500",promo:true},
+{id:5,nome:"Red Label 1L",preco:89.90,cat:"destilado",img:"https://images.unsplash.com/photo-1569529465841-dfecdab7503b?q=80&w=500"},
+{id:6,nome:"Smirnoff Ice 275ml",preco:6.50,cat:"destilado",img:"https://images.unsplash.com/photo-1551538827-9c037cb4f32a?q=80&w=500"},
+{id:7,nome:"Absolut Vodka 750ml",preco:99.90,cat:"destilado",img:"https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=500"},
+{id:8,nome:"Red Bull 250ml",preco:8.90,cat:"energetico",img:"https://images.unsplash.com/photo-1553456558-aff63285bdd1?q=80&w=500"},
+{id:9,nome:"Monster 473ml",preco:9.90,cat:"energetico",img:"https://images.unsplash.com/photo-1624552184280-9e9631bbeee9?q=80&w=500"},
+{id:10,nome:"Gelo 10kg",preco:18.00,cat:"gelo",img:"https://images.unsplash.com/photo-1544148103-077216c6e06e?q=80&w=500"},
+{id:11,nome:"Carvão Zapp 3kg",preco:22.00,cat:"gelo",img:"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=500"},
+{id:12,nome:"Skol Beats 269ml",preco:5.50,cat:"cerveja",img:"https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?q=80&w=500"},
+];
+let carrinho=[],filtro='todos';
+function render(){const g=document.getElementById('grid');const l=filtro==='todos'?produtos:produtos.filter(p=>p.cat===filtro);g.innerHTML=l.map(p=>`<div class="bg-[#141414] border border-white/10 rounded-[1.5rem] p-3 hover:border-purple-500/50"><div class="aspect-square rounded-2xl overflow-hidden bg-[#0a0a0a] mb-3"><img src="${p.img}" class="w-full h-full object-cover"></div><h3 class="font-bold text-sm h-10 overflow-hidden">${p.nome}</h3><div class="flex items-end justify-between mt-3"><p class="font-black text-lg text-green-400">R$ ${p.preco.toFixed(2)}</p><button onclick="add(${p.id})" class="w-9 h-9 bg-white text-black rounded-full font-black text-lg">+</button></div></div>`).join('');}
+function filterCat(c){filtro=c;render();}
+function add(id){const p=produtos.find(x=>x.id===id);const i=carrinho.find(x=>x.id===id);if(i)i.qtd++;else carrinho.push({...p,qtd:1});updateCart();document.getElementById('cart-drawer').classList.remove('hidden');}
+function updateCart(){document.getElementById('cart-count').innerText=carrinho.reduce((a,b)=>a+b.qtd,0);const s=carrinho.reduce((a,b)=>a+b.preco*b.qtd,0);document.getElementById('cart-total').innerText=`R$ ${s.toFixed(2)}`;document.getElementById('cart-items').innerHTML=carrinho.length===0?'<p class="text-zinc-500 text-center mt-20">Carrinho vazio 🍺</p>':carrinho.map(i=>`<div class="flex gap-3 bg-white/5 p-3 rounded-2xl"><img src="${i.img}" class="w-14 h-14 rounded-xl object-cover"><div class="flex-1"><p class="text-sm font-bold">${i.nome}</p><p class="text-green-400 text-sm">R$ ${i.preco.toFixed(2)}</p><div class="flex gap-2 mt-1"><button onclick="changeQtd(${i.id},-1)" class="w-6 h-6 rounded-full bg-white/10">-</button><span class="text-sm font-bold">${i.qtd}</span><button onclick="changeQtd(${i.id},1)" class="w-6 h-6 rounded-full bg-white/10">+</button></div></div><button onclick="remove(${i.id})">✕</button></div>`).join('');}
+function changeQtd(id,d){const i=carrinho.find(x=>x.id===id);if(!i)return;i.qtd+=d;if(i.qtd<=0)carrinho=carrinho.filter(x=>x.id!==id);updateCart();}
+function remove(id){carrinho=carrinho.filter(x=>x.id!==id);updateCart();}
+function toggleCart(){document.getElementById('cart-drawer').classList.toggle('hidden');}
+function finalizarWhats(){if(carrinho.length===0){alert('Carrinho vazio!');return;}let m="*🍻 NOVO PEDIDO - ADEGA VIBE*%0A%0A";carrinho.forEach(i=>{m+=`• ${i.qtd}x ${i.nome} - R$ ${(i.preco*i.qtd).toFixed(2)}%0A`});const t=carrinho.reduce((a,b)=>a+b.preco*b.qtd,0);m+=`%0A*TOTAL: R$ ${t.toFixed(2)}*%0A`;window.open(`https://wa.me/5517999999999?text=${m}`,'_blank');}
+render();
+</script>
+</body>
+</html>
